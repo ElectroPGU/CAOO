@@ -1,3 +1,3 @@
 package projet;
 
-public enum Etat {cree, publiee, annulee, terminee}
+public enum Etat {CREE, PUBLIEE, ANNULEE, TERMINEE}
