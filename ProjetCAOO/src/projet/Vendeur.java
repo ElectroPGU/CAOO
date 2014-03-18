@@ -4,7 +4,7 @@ public class Vendeur extends Role{
 	
 	public void creerEnchere()
 	{
-		
+		//test PUSH
 	}
 
 	public void publierEnchere(Enchere enchere)
