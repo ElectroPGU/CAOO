@@ -57,19 +57,27 @@ public class Utilisateur {
 		return false;
 	}
 	
-	public ArrayList<Enchere> voirLaListeEnchere(Utilisateur utilisateur)
+	public ArrayList<Enchere> voirLaListeEnchere(Utilisateur utilisateurDemande, Utilisateur utilisateurVendeur)
 	{
-		if(utilisateur.getLogin().equals(this.login))
+		if(utilisateurDemande.getLogin().equals(utilisateurVendeur.getLogin()))
 		{
-			return utilisateur.getListeEncheres();
+			return utilisateurVendeur.getListeEncheres();
 		}
 		else
 		{
 			ArrayList<Enchere> listeEncheresARetourner = new ArrayList<Enchere>();
-			for(Enchere enchere : utilisateur.getListeEncheres())
+			for(Enchere enchere : utilisateurVendeur.getListeEncheres())
 			{
-				//listeEncheresARetourner.add(enchere.get)
-				// A FINIR
+				if(enchere.getEtat().equals(Etat.PUBLIEE))
+					listeEncheresARetourner.add(enchere);
+				else if(enchere.getEtat().equals(Etat.ANNULEE))
+				{
+					for(Offre o : enchere.getListeOffres())
+					{
+						if(o.getLoginAcheteur().equals(utilisateurDemande.getLogin()))
+							listeEncheresARetourner.add(enchere);
+					}
+				}
 			}
 			return listeEncheresARetourner;
 		}
@@ -129,8 +137,7 @@ public class Utilisateur {
 		}
 		return "";
 	}
-
-
+	
 	/******************************** ACESSEURS ************************************/
 	public String getLogin() {
 		return login;

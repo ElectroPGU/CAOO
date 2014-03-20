@@ -39,6 +39,37 @@ public class Enchere {
 			return 1;
 	}
 	
+	public Float getValeurPlusHaute(ArrayList<Offre> listeOffres)
+	{
+		Float result = new Float(0);
+		for(int i=0; i<listeOffres.size(); i++)
+		{
+			for(Offre o : listeOffres)
+			{
+				if(o.getPrix() > result)
+					result = o.getPrix();
+			}
+		}
+		return result;
+	}
+	
+	public String getGagnant(ArrayList<Offre> listeOffres)
+	{
+		Float result = new Float(0);
+		String gagnant = "";
+		for(int i=0; i<listeOffres.size(); i++)
+		{
+			for(Offre o : listeOffres)
+			{
+				if(o.getPrix() > result)
+					result = o.getPrix();
+					gagnant = o.getLoginAcheteur();
+			}
+		}
+		return gagnant;
+	}
+	
+	
 	public String getLoginCreateur() {
 		return loginCreateur;
 	}
