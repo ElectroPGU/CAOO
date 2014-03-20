@@ -11,6 +11,7 @@ public class Enchere {
 	private final Float prixMinimum;
 	private final Float prixReserve;
 	private Boolean visible = false;
+	private Boolean prixReserveAtteint = false;
 	private Etat etat;
 	private ArrayList<Offre> listeOffres = new ArrayList<Offre>();
 
@@ -21,11 +22,16 @@ public class Enchere {
 		this.prixMinimum = prixMinimum;
 		this.prixReserve = prixReserve;
 	}
+	
 
 	public int addOffre(String loginCreateur ,Offre offre)
 	{
 		if(loginCreateur != this.loginCreateur && offre.getPrix() >= prixMinimum)
 		{
+			if(offre.getPrix() >= this.prixReserve)
+			{
+				this.prixReserveAtteint = true;
+			}
 			this.listeOffres.add(offre);
 			return 0;
 		}
@@ -79,6 +85,16 @@ public class Enchere {
 
 	public void setListeOffres(ArrayList<Offre> listeOffres) {
 		this.listeOffres = listeOffres;
+	}
+
+	public Boolean getPrixReserveAtteint() {
+		if(prixReserveAtteint)
+			return prixReserveAtteint;
+		return false;
+	}
+
+	public void setPrixReserveAtteint(Boolean prixReserveAtteint) {
+		this.prixReserveAtteint = prixReserveAtteint;
 	}
 
 	

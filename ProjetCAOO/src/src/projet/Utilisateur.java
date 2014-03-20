@@ -1,5 +1,6 @@
 package src.projet;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -11,6 +12,8 @@ public class Utilisateur {
 
 	private Boolean acheteur = false;
 	private Boolean vendeur = false;
+	
+	private ArrayList<Enchere> listeEncheres = new ArrayList<Enchere>();
 	
 	public Utilisateur(String login, String nom, String prenom)
 	{
@@ -54,6 +57,24 @@ public class Utilisateur {
 		return false;
 	}
 	
+	public ArrayList<Enchere> voirLaListeEnchere(Utilisateur utilisateur)
+	{
+		if(utilisateur.getLogin().equals(this.login))
+		{
+			return utilisateur.getListeEncheres();
+		}
+		else
+		{
+			ArrayList<Enchere> listeEncheresARetourner = new ArrayList<Enchere>();
+			for(Enchere enchere : utilisateur.getListeEncheres())
+			{
+				//listeEncheresARetourner.add(enchere.get)
+				// A FINIR
+			}
+			return listeEncheresARetourner;
+		}
+	}
+	
 	/********************************* VENDEUR ************************************/
 	public Enchere creerEnchere(String loginCreateur , Objet objet, Date dateLimite, Float prixMinimum, Float prixReserve)
 	{
@@ -62,6 +83,7 @@ public class Utilisateur {
 			try
 			{
 				Enchere enchere = new Enchere(loginCreateur, objet, dateLimite, prixMinimum, prixReserve);
+				this.listeEncheres.add(enchere);
 				return enchere;
 			}
 			catch(Exception e)
@@ -138,6 +160,13 @@ public class Utilisateur {
 		this.vendeur = vendeur;
 	}
 
+	public ArrayList<Enchere> getListeEncheres() {
+		return listeEncheres;
+	}
+
+	public void setListeEncheres(ArrayList<Enchere> listeEncheres) {
+		this.listeEncheres = listeEncheres;
+	}
 	
 	
 }

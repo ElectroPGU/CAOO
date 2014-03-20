@@ -26,6 +26,4 @@ public class Objet {
 		this.description = description;
 	}
 	
-	
-	
 }

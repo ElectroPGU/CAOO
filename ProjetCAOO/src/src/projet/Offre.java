@@ -20,15 +20,21 @@ public class Offre {
 		this.prix = prix;
 	}
 
-	public String getAcheteur() {
+	public String getLoginAcheteur() {
 		return loginAcheteur;
 	}
 
-	public void setAcheteur(String loginAcheteur) {
+	public void setLoginAcheteur(String loginAcheteur) {
 		this.loginAcheteur = loginAcheteur;
 	}
-	
-	
+
+	public Enchere getEnchere() {
+		return enchere;
+	}
+
+	public void setEnchere(Enchere enchere) {
+		this.enchere = enchere;
+	}
 	
 	
 }
