@@ -14,6 +14,7 @@ public class Utilisateur {
 	private Boolean vendeur = false;
 	
 	private ArrayList<Enchere> listeEncheres = new ArrayList<Enchere>();
+	private ArrayList<Alerte> listeAlertes = new ArrayList<Alerte>();
 	
 	public Utilisateur(String login, String nom, String prenom)
 	{
@@ -22,13 +23,19 @@ public class Utilisateur {
 		this.prenom = prenom;
 	}
 	
+	public void creerAlerte(Enchere enchere, TypeAlerte typeAlerte){
+		listeAlertes.add(new Alerte(enchere, typeAlerte));
+	}
+	
 	/*********************************ACHETEUR*************************************/
 	public int emettreOffre(Offre offre, Enchere enchere)
 	{
 		if(acheteur && enchere.getEtat().equals(Etat.PUBLIEE))
 		{
-			if (enchere.addOffre(this.login ,offre) == 0)
+			if (enchere.addOffre(this.login ,offre) == 0){
+				this.creerAlerte(enchere, TypeAlerte.NOUVELLEOFFRE);
 				return 0;
+			}
 			else
 				return 1;
 		}
@@ -174,6 +181,10 @@ public class Utilisateur {
 	public void setListeEncheres(ArrayList<Enchere> listeEncheres) {
 		this.listeEncheres = listeEncheres;
 	}
-	
+
+	public ArrayList<Alerte> getListeAlertes() {
+		return listeAlertes;
+	}
+
 	
 }

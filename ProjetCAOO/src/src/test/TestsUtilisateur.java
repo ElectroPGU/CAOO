@@ -44,7 +44,7 @@ public class TestsUtilisateur {
 	@Test
 	public void testCreationEnchereNonVendeur() {
 		user.setVendeur(false);
-		Enchere e = user.creerEnchere(user.getLogin(), null, dateLimite,
+		Enchere e = user.creerEnchere(user.getLogin(), produit, dateLimite,
 				prixMinimum, prixReserve);
 		if (e != null) {
 
@@ -58,7 +58,7 @@ public class TestsUtilisateur {
 			Assert.assertSame(true, e.getVisible());
 		} 
 		else {		
-			System.out.println("Methode : testCreationEncherePubliee - L'enchere n'a pas ete creee");
+			System.out.println("Methode : testCreationEnchereNonVendeur - L'enchere n'a pas ete creee");
 			Assert.assertNull(e);
 		}
 	}

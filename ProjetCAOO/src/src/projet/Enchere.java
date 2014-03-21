@@ -2,8 +2,9 @@ package src.projet;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Observable;
 
-public class Enchere {
+public class Enchere extends Observable{
 	
 	private String loginCreateur;
 	private final Objet objet;
@@ -28,11 +29,20 @@ public class Enchere {
 	{
 		if(loginCreateur != this.loginCreateur && offre.getPrix() >= prixMinimum)
 		{
+			if(this.listeOffres.size() > 0){
+				if(offre.getPrix() < this.listeOffres.get(this.listeOffres.size()-1).getPrix()){
+				return 1;
+				}
+			}
+			this.setChanged();
 			if(offre.getPrix() >= this.prixReserve)
 			{
 				this.prixReserveAtteint = true;
+				this.notifyObservers((Object) TypeAlerte.PRIXRESERVEATTEINT);
 			}
 			this.listeOffres.add(offre);
+			this.notifyObservers((Object) TypeAlerte.NOUVELLEOFFRE);
+			this.notifyObservers((Object) TypeAlerte.OFFRESUPERIEURE);
 			return 0;
 		}
 		else
@@ -92,6 +102,10 @@ public class Enchere {
 
 	public void setEtat(Etat etat) {
 		this.etat = etat;
+		if(etat == Etat.ANNULEE){
+			this.setChanged();
+			this.notifyObservers((Object) TypeAlerte.ENCHEREANNULEE);
+		}
 	}
 
 	public Objet getObjet() {
