@@ -42,7 +42,6 @@ public class Enchere extends Observable{
 			}
 			this.listeOffres.add(offre);
 			this.notifyObservers((Object) TypeAlerte.NOUVELLEOFFRE);
-			this.notifyObservers((Object) TypeAlerte.OFFRESUPERIEURE);
 			return 0;
 		}
 		else

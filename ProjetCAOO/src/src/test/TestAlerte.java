@@ -72,13 +72,13 @@ public class TestAlerte {
 		Enchere e = user.creerEnchere(user.getLogin(), produit, dateLimite, prixMinimum, prixReserve);
 		e.setEtat(Etat.PUBLIEE);
 		e.setVisible(true);
-		user2.creerAlerte(e, TypeAlerte.OFFRESUPERIEURE);
+		user2.creerAlerte(e, TypeAlerte.NOUVELLEOFFRE);
 		Offre offre = new Offre(user2.getLogin(), e, new Float(51));
 		Offre offre1 = new Offre(user3.getLogin(), e, new Float(70));
 		user2.emettreOffre(offre, e);
 		user3.emettreOffre(offre1, e);
 		
-		assertEquals("Une offre supérieure à la votre a été déposée sur l'enchère",user2.getListeAlertes().get(0).getMessage().toString());
+		assertEquals("Une nouvelle offre a été déposée sur votre enchère",user2.getListeAlertes().get(0).getMessage().toString());
 		System.out.println("Methode : testOffreSuperieurEmiseParAutreAcheteur - Alerte offre superieur à la votre émise : " + user2.getListeAlertes().get(0).getMessage().toString());
 		
 		

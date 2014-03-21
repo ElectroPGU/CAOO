@@ -52,9 +52,6 @@ public class Alerte implements Observer{
 			case ENCHEREANNULEE :
 				this.message ="L'enchère a été annulée";
 				break;
-			case OFFRESUPERIEURE :
-				this.message ="Une offre supérieure à la votre a été déposée sur l'enchère";
-				break;
 			}
 		}
 	}
